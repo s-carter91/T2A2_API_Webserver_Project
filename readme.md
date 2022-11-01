@@ -22,16 +22,16 @@ The endpoints of the api are displayed in the table below:
 | /login         | Allows user to login | POST |
 | /comps         | User can create a comp | POST |
 | /comps/all     | User can view all of their created comps | GET |
-| /comps/&ltid:int&gt| User can view a specific comp | GET |
-| /comps/&ltid:int&gt| User can edit a specific comp | PATCH |
-| /comps/&ltid:int&gt| User can delete a specific comp | DELETE |
+| /comps/\<id:int>| User can view a specific comp | GET |
+| /comps/\<id:int>| User can edit a specific comp | PATCH |
+| /comps/\<id:int>| User can delete a specific comp | DELETE |
 | /comps/stier   | User can view the S tier comps | GET |
 | /champs        | User can view all champions | GET |
 | /champs        | Admin can create a champion | POST |
-| /champs/&ltid:int&gt| Admin can delete a champion | DELETE |
+| /champs/\<id:int>| Admin can delete a champion | DELETE |
 | /traits        | User can view all traits and a description | GET |
 | /traits        | Admin can create a trait | POST |
-| /traits/&ltid:int&gt| Admin can delete a trait | DELETE |
+| /traits/\<id:int>| Admin can delete a trait | DELETE |
 
 #### 6. An ERD for your app
 
