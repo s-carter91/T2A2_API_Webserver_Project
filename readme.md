@@ -6,11 +6,14 @@ This API is being created to provide convenience when playing the Teamfight Tact
 
 #### 2. Why is it a problem that needs solving?
 
-This solves a problem for newer or casual players of the game that may not have complete knowledge of the games units and which ones work best together. It will also assist more experienced players by giving an insight into which team comps are best in the current meta (Most Effective Tactics Available). 
+This solves a problem for newer or casual players of the game that may not have complete knowledge of the games units and which ones work best together. It will also assist more experienced players by giving an insight into which team comps are best in the current meta (Most Effective Tactics Available).
 
 #### 3. Why have you chosen this database system. What are the drawbacks compared to others?
 
 #### 4. Identify and discuss the key functionalities and benefits of an ORM
+
+Note form (to be updated!!)  
+Object Relational Mappers (ORMs) Libraries that allow devs to map data in a relational database to objects. Allows devs to work with data within a databse without them having to know raw SQL commands. Allows interaction with the database in an Object Orientated form. Full CRUD (Create, read, update and delete) operations can be carried out on the database using the ORM. Another benefit of an ORM is they are normally optimized for performance. This is achieved by the ORM determining the optimal querty for a developers code. ORMs keep data valid and secure with built in functionality that can prevent against SQL injection attacks.
 
 #### 5. Document all endpoints for your API
 
@@ -18,7 +21,8 @@ The endpoints of the api are displayed in the table below:
 
 | Endpoints      | Description | HTTP Requests |
 | ---------      | ------------| ------------- |
-| /register      | Allows for user registration | POST |
+| /register      | Allows for non-admin user registration | POST |
+| /register/admin | Allows for admin user registration | POST |
 | /login         | Allows user to login | POST |
 | /comps         | User can create a comp | POST |
 | /comps/all     | User can view all of their created comps | GET |
@@ -32,6 +36,7 @@ The endpoints of the api are displayed in the table below:
 | /traits        | User can view all traits and a description | GET |
 | /traits        | Admin can create a trait | POST |
 | /traits/\<id:int>| Admin can delete a trait | DELETE |
+| /items         | View all items in TFT | GET |
 
 #### 6. An ERD for your app
 
@@ -39,6 +44,8 @@ The endpoints of the api are displayed in the table below:
 
 #### 8. Describe your projects models in terms of the relationships they have with each other
 
-#### 9.	Discuss the database relations to be implemented in your application
+#### 9. Discuss the database relations to be implemented in your application
 
-#### 10.	Describe the way tasks are allocated and tracked in your project
+#### 10. Describe the way tasks are allocated and tracked in your project
+
+Kanban board on Trello
