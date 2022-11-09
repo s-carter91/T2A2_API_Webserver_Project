@@ -5,10 +5,10 @@ class Item(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False)
-    description = db.Column(db.Text, nullable=False)
+    item_bonus = db.Column(db.Text, nullable=False)
+    stats = db.Column(db.String(50))
 
-class CommentSchema(ma.schema):
-    pass
+class ItemSchema(ma.Schema):
 
     class Meta:
         fields = ('id', 'name', 'description')

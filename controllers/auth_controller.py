@@ -1,4 +1,8 @@
 from flask import Blueprint, request, abort
+from init import db, jwt, bcrypt
+from models.users import User, UserSchema
+from sqlalchemy.exc import IntegrityError
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -10,20 +14,40 @@ def auth_admin():
         abort(401)
 
 @auth_bp.route('/users/', methods=['GET'])
-@jwt_required
+@jwt_required()
 def display_users():
-    auth_admin()
+    # auth_admin()
+    pass
+    
+
+@auth_bp.route('/users/<int:id>/', methods=['DELETE'])
+@jwt_required()
+def delete_user():
+    # auth_admin()
     pass
 
 @auth_bp.route('/register/', methods = ['POST'])
 def user_register():
-    pass
+    try:
+        user = User(
+            username = request.json['username'],
+            email = request.json['email'],
+            password = bcrypt.generate_password_hash(request.json['password']).decode('utf-8'),
+        )
 
-@auth_bp.route('/registeradmin/', methods = ['POST'])
-@jwt_required
+        db.session.add(user)
+        db.session.commit()
+        return UserSchema(exclude=['password']).dump(user), 201
+    except IntegrityError:
+        return {'error': 'Username already in use'}, 409
+
+@auth_bp.route('/register/admin/', methods = ['POST'])
+@jwt_required()
 def admin_register():
-    auth_admin()
+    # auth_admin()
     pass
 
 @auth_bp.route('/login/')
 def login():
+    pass
+

@@ -1,9 +1,10 @@
 from flask import Blueprint
 from init import db, bcrypt
-from models.user import User
+from models.users import User
 from models.traits import Trait
-from models.champs import Champion
+from models.champions import Champion
 from models.items import Item
+from models.teamboards import Teamboard
 
 db_commands = Blueprint('db', __name__)
 
@@ -22,12 +23,13 @@ def drop_db():
 def seed_db():
     users = [
         User(
+            username = 'admin',
             email = 'admin@tft.com',
             password = bcrypt.generate_password_hash('eggs').decode('utf-8'),
             is_admin = True
         ),
         User(
-            name = 'Cheese Steiner',
+            username = 'Cheese_Steiner',
             email = 'cheeseman@generic.com',
             password = bcrypt.generate_password_hash('12345').decode('utf-8'),
         ),
@@ -38,17 +40,17 @@ def seed_db():
         Trait(
             name = "Astral",
             description = "After each player combat, gain an Astral Orb. The combined star level of your Astral champions increases the quality of the orb. Astral champions gain Ability Power",
-            Breakpoints = "3/5/8"
+            breakpoints = "3/5/8"
         ),
         Trait(
             name = "Darkflight",
             description = "The unit in the Darkflight hex is sacrificed, granting a copy of an item they have to each Darkflight champion, and bonus health to each.",
-            Breakpoints = "2/4/6/8"
+            breakpoints = "2/4/6/8"
         ),
         Trait(
             name = "Dragon",
             description = "Dragons require 2 team slots, provide +3 to their marked trait and gain additional bonuses based on how many Dragons are on your team.",
-            Breakpoints = "1/2/3/4/5/6"
+            breakpoints = "1/2/3/4/5/6"
         ),
         Trait(
             name = "Guild",
@@ -66,7 +68,7 @@ def seed_db():
         Trait(
             name = "Mirage",
             description = "Mirage champions gain a different Trait bonus from game to game. Variations: Electric Overload, Warlord, Pirate, Dawnbringer, Executioner, Spellsword, Duelist.",
-            breakpoints = "2"
+            breakpoints = "2/4/6/8"
         ),
         Trait(
             name = "Scalescorn",
@@ -117,8 +119,8 @@ def seed_db():
         ),  
         Trait(
             name = "Warrior",
-            description = "Warrior attacks have a 50% chance to increase the damage of their next attack.",
-            breakpoint = "2 - 75% damage. 4 - 150% damage. 6 - 275% damage"
+            description = "Warrior attacks have a chance to increase the damage of their next attack.",
+            breakpoints = "2/4/6"
         )     
     ]
 
@@ -310,7 +312,8 @@ def seed_db():
 
 
     # Unsure if both traits and users can be included in the one add parameter
-    db.session.add_all(traits, users)
+    db.session.add_all(traits)
+    db.session.add_all(users)
     db.session.commit()
 
     champs = [
@@ -657,3 +660,21 @@ def seed_db():
             suggested_items = "Bramble Vest, Dragon's Claw, Warmog's Armor"
         )
     ]
+
+    db.session.add_all(champs)
+    db.session.commit()
+    print('Tables Seeded')
+
+@db_commands.cli.command('team')
+def seed_tb():
+    tbs = [
+        Teamboard(
+            title = "Lagoon",
+            description = "Lagoon Team",
+    
+            user_username = "admin"
+        )
+    ]
+    db.session.add_all(tbs)
+    db.session.commit()
+    print('tb Seeded')
