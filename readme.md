@@ -38,6 +38,8 @@ The endpoints of the api are displayed in the table below:
 | /traits/\<id:int>| Admin can delete a trait | DELETE |
 | /items         | View all items in TFT | GET |
 
+
+
 #### 6. An ERD for your app
 
 #### 7. Detail any third party services that your app will use

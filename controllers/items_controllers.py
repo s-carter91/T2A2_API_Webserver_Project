@@ -1,6 +1,6 @@
 from flask import Blueprint
 from init import db
-from models.items import Item, ItemSchema
+from models.teamboards_champions import Item, ItemSchema
 
 items_bp = Blueprint('items', __name__, url_prefix='/items/')
 
