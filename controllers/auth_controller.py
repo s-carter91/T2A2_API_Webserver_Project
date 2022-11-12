@@ -27,7 +27,7 @@ def user_register():
 
         db.session.add(user)
         db.session.commit()
-        return UserSchema(exclude=['password']).dump(user), 201
+        return UserSchema(exclude=['password', 'is_admin']).dump(user), 201
     except IntegrityError:
         return {'error': 'Username or email already in use'}, 409
 
@@ -59,7 +59,7 @@ def update_one_card():
     user = db.session.scalar(stmt)
     user.email = request.json.get('email') or user.email
     db.session.commit()
-    return UserSchema(exclude=['password']).dump(user)
+    return UserSchema(exclude=['password', 'is_admin']).dump(user)
 
 
 

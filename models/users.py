@@ -16,4 +16,3 @@ class UserSchema(ma.Schema):
     class Meta:
         fields = ('username', 'email', 'password', 'is_admin')
         ordered = True
-        dumponly = ('username', 'email')

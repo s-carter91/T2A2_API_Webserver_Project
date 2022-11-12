@@ -19,186 +19,207 @@ Object Relational Mappers (ORMs) Libraries that allow devs to map data in a rela
 
 The endpoints of the api are displayed in the table below:  
 
-#### Auth routes:
+### Auth routes:
 
-/auth/register/
-*Methods:  POST
-*Arguments: None
-*Description: Allows user to register/create a login
-*Authentication: None
-*Authorisation: None
-*Request Body: Username, Email, Password
-*Response:
+#### /auth/register/
+* Methods:  POST
+* Arguments: None
+* Description: Allows user to register/create a login
+* Authentication: None
+* Authorisation: None
+* Request Body: Username, Email, Password
+* Response:
+![screenshot of auth/register response](docs/auth_register_not_admin.png)
 
-/auth/register/admin/
-*Methods:  POST
-*Arguments: None
-*Description: Allows admin to create another account with admin authorisation
-*Authentication: @jwt_required
-*Authorisation: Admin only
-*Request Body: Username, Email, Password
-*Response:
+#### /auth/register/admin/
+* Methods:  POST
+* Arguments: None
+* Description: Allows admin to create another account with admin authorisation
+* Authentication: @jwt_required
+* Authorisation: Admin only
+* Request Body: Username, Email, Password
+* Response:
+![screenshot of auth/register/admin response](docs/auth_register_admin.png)
 
-/auth/login/
-*Methods:  POST
-*Arguments: None
-*Description: Allows user to login
-*Authentication: None
-*Authorisation: None
-*Request Body: None
-*Response:
+#### /auth/login/
+* Methods:  POST
+* Arguments: None
+* Description: Allows user to login
+* Authentication: None
+* Authorisation: None
+* Request Body: None
+* Response:
+![screenshot of auth/login response](docs/auth_login.png)
 
- /auth/users/
-*Methods:  GET
-*Arguments: None
-*Description: Allows admin to retrieve all users
-*Authentication: @jwt_required
-*Authorisation: Admin only
-*Request Body: None
-*Response:
+#### /auth/users/
+* Methods:  GET
+* Arguments: None
+* Description: Allows admin to retrieve all users
+* Authentication: @jwt_required
+* Authorisation: Admin only
+* Request Body: None
+* Response:
+![screenshot of auth/users response](docs/auth_users.png)
 
-/auth/users/\<username>/
-*Methods:  GET
-*Arguments: Username
-*Description: Allows admin to retrieve specific user
-*Authentication: @jwt_required
-*Authorisation: Admin only
-*Request Body: None
-*Response:
+#### /auth/users/\<username>/
+* Methods:  GET
+* Arguments: Username
+* Description: Allows admin to retrieve specific user
+* Authentication: @jwt_required
+* Authorisation: Admin only
+* Request Body: None
+* Response:
+![screenshot of auth/users/username response](docs/auth_users_username.png)
+![screenshot of auth/users/username failed response](docs/auth_users_username_error.png)
 
-/auth/users/\<username>/
-*Methods:  DELETE
-*Arguments: Username
-*Description: Allows admin to delete a specific user
-*Authentication: @jwt_required
-*Authorisation: Admin only
-*Request Body: None
-*Response:
+#### /auth/users/\<username>/
+* Methods:  DELETE
+* Arguments: Username
+* Description: Allows admin to delete a specific user
+* Authentication: @jwt_required
+* Authorisation: Admin only
+* Request Body: None
+* Response:
+![screenshot of auth/user/delete response](docs/auth_users_delete.png)
+![screenshot of auth/user/delete failed response](docs/auth_users_delete_error.png)
 
-#### Teamboard Data Routes:
+### Teamboard Data Routes:
 
-/teamboards/
-*Methods:  GET
-*Arguments: None
-*Description: Retrieves all stored Teamboards created by the logged in user
-*Authentication: @jwt_required
-*Authorisation: Users
-*Request Body: None
-*Response:
+#### /teamboards/
+* Methods:  GET
+* Arguments: None
+* Description: Retrieves all stored Teamboards created by the logged in user
+* Authentication: @jwt_required
+* Authorisation: Users
+* Request Body: None
+* Response:
+![screenshot of teamboards/ response](docs/teamboards_all.png)
 
-/teamboards/\<int:id>/
-*Methods:  GET
-*Arguments: Teamboard ID
-*Description: Retrieves the specified teamboard if the teamboards user matches the logged in user
-*Authentication: @jwt_required
-*Authorisation: Users
-*Request Body: None
-*Response:
+#### /teamboards/\<int:id>/
+* Methods:  GET
+* Arguments: Teamboard ID
+* Description: Retrieves the specified teamboard if the teamboards user matches the logged in user
+* Authentication: @jwt_required
+* Authorisation: Users
+* Request Body: None
+* Response:
+![screenshot of teamboards/ single response](docs/teamboards_get_one.png)
 
-/teamboards/
-*Methods:  POST
-*Arguments: None
-*Description: Creates a new teamboard setting the user as the currently logged in user
-*Authentication: @jwt_required
-*Authorisation: Users
-*Request Body: Teamboard title and description
-*Response:
+#### /teamboards/
+* Methods:  POST
+* Arguments: None
+* Description: Creates a new teamboard setting the user as the currently logged in user
+* Authentication: @jwt_required
+* Authorisation: Users
+* Request Body: Teamboard title and description
+* Response:
+![screenshot of teamboards/create response](docs/teamboard_create.png)
 
-/teamboards/addchamp/
-*Methods:  POST
-*Arguments: None
-*Description: Creates a new record in the teamboards and champions joining/association table. (adding a champion to a teamboard)
-*Authentication: @jwt_required
-*Authorisation: Users
-*Request Body: Teamboard ID and Champion name (both PKs)
-*Response:
+#### /teamboards/addchamp/
+* Methods:  POST
+* Arguments: None
+* Description: Creates a new record in the teamboards and champions joining/association table. (adding a champion to a teamboard)
+* Authentication: @jwt_required
+* Authorisation: Users
+* Request Body: Teamboard ID and Champion name (both PKs)
+* Response:
+![screenshot of teamboards/addchamp response](docs/add_champ_teamboard.png)
 
-/teamboards/removechamp/
-*Methods:  DELETE
-*Arguments: None
-*Description: Deletes a record in the teamboards and champions joining/association table.
-*Authentication: @jwt_required
-*Authorisation: Users
-*Request Body: Teamboard ID and Champion name
-*Response:
+#### /teamboards/removechamp/
+* Methods:  DELETE
+* Arguments: None
+* Description: Deletes a record in the teamboards and champions joining/association table.
+* Authentication: @jwt_required
+* Authorisation: Users
+* Request Body: Teamboard ID and Champion name
+* Response:
+![screenshot of teamboards/remove delete response](docs/remove_champ_teamboard.png)
 
 #### Champion Data Routes:
 
-/champions/
-*Methods:  GET
-*Arguments: None
-*Description: Retrieves all stored Champions details
-*Authentication: None
-*Authorisation: None
-*Request Body: None
-*Response:
+#### /champions/
+* Methods:  GET
+* Arguments: None
+* Description: Retrieves all stored Champions details
+* Authentication: None
+* Authorisation: None
+* Request Body: None
+* Response:
+![screenshot of champions/ response](docs/champs_all.png)
 
-/champions/\<name>/
-*Methods:  GET
-*Arguments: Champion Name
-*Description: Retrieves a specific Champions and details
-*Authentication: None
-*Authorisation: None
-*Request Body: None
-*Response:
+#### /champions/\<name>/
+* Methods:  GET
+* Arguments: Champion Name
+* Description: Retrieves a specific Champions and details
+* Authentication: None
+* Authorisation: None
+* Request Body: None
+* Response:
+![screenshot of champions/ single response](docs/champs_get_one.png)
 
-Item Data Routes:
+### Item Data Routes:
 
-/items/
-*Methods:  GET
-*Arguments: None
-*Description: Retrieves all stored items and details
-*Authentication: None
-*Authorisation: None
-*Request Body: None
-*Response:
+#### /items/
+* Methods:  GET
+* Arguments: None
+* Description: Retrieves all stored items and details
+* Authentication: None
+* Authorisation: None
+* Request Body: None
+* Response:
+![screenshot of items/ response](docs/items_all.png)
 
-/items/\<name>/
-*Methods:  GET
-*Arguments: Item Name
-*Description: Retrieves a specific items details
-*Authentication: None
-*Authorisation: None
-*Request Body: None
-*Response:
+#### /items/\<name>/
+* Methods:  GET
+* Arguments: Item Name
+* Description: Retrieves a specific items details
+* Authentication: None
+* Authorisation: None
+* Request Body: None
+* Response:
+![screenshot of items/ single response](docs/item_get_one.png)
 
-/items/addsuggitem/
-*Methods:  POST
-*Arguments: None
-*Description: Creates a new record in the champions and items joining/association table. (adding a suggested item to a champion)
-*Authentication: @jwt_required
-*Authorisation: Admin only
-*Request Body: Champion Name and Item Name
-*Response:
+#### /items/addsuggitem/
+* Methods:  POST
+* Arguments: None
+* Description: Creates a new record in the champions and items joining/association table. (adding a suggested item to a champion)
+* Authentication: @jwt_required
+* Authorisation: Admin only
+* Request Body: Champion Name and Item Name
+* Response:
+![screenshot of items/addsuggitem response](docs/items_add_sugg.png)
 
-/items/removesuggitem/
-*Methods:  DELETE
-*Arguments: None
-*Description: Deletes a record from the champions and items joining/association table.
-*Authentication: @jwt_required
-*Authorisation: Admin only
-*Request Body: Champion Name and Item Name
-*Response:
+#### /items/removesuggitem/
+* Methods:  DELETE
+* Arguments: None
+* Description: Deletes a record from the champions and items joining/association table.
+* Authentication: @jwt_required
+* Authorisation: Admin only
+* Request Body: Champion Name and Item Name
+* Response:
+![screenshot of items/deletesuggitem response](docs/items_remove_sugg.png)
 
-#### Origins Data Routes:
+### Origins Data Routes:
 
-/origins/
-*Methods:  GET
-*Arguments: None
-*Description: Retrieves all stored origins and details
-*Authentication: None
-*Authorisation: None
-*Request Body: None
-*Response:
+#### /origins/
+* Methods:  GET
+* Arguments: None
+* Description: Retrieves all stored origins and details
+* Authentication: None
+* Authorisation: None
+* Request Body: None
+* Response:
+![screenshot of origins/ response](docs/origins_all.png)
 
-/origins/\<name>/
-*Methods:  GET
-*Arguments: Origin Name
-*Description: Retrieves a specific origins details
-*Authentication: None
-*Authorisation: None
-*Request Body: None
-*Response:
+#### /origins/\<name>/
+* Methods:  GET
+* Arguments: Origin Name
+* Description: Retrieves a specific origins details
+* Authentication: None
+* Authorisation: None
+* Request Body: None
+* Response:
+![screenshot of origins/ single response](docs/origins_get_one.png)
 
 | Endpoints      | Description | HTTP Requests |
 | ---------      | ------------| ------------- |
