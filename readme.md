@@ -28,7 +28,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: None
 * Authorisation: None
 * Request Body: Username, Email, Password
-* Response:
+* Response:  
 ![screenshot of auth/register response](docs/auth_register_not_admin.png)
 
 #### /auth/register/admin/
@@ -38,7 +38,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Admin only
 * Request Body: Username, Email, Password
-* Response:
+* Response:  
 ![screenshot of auth/register/admin response](docs/auth_register_admin.png)
 
 #### /auth/login/
@@ -48,7 +48,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: None
 * Authorisation: None
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of auth/login response](docs/auth_login.png)
 
 #### /auth/users/
@@ -58,7 +58,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Admin only
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of auth/users response](docs/auth_users.png)
 
 #### /auth/users/\<username>/
@@ -68,8 +68,8 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Admin only
 * Request Body: None
-* Response:
-![screenshot of auth/users/username response](docs/auth_users_username.png)
+* Response:  
+![screenshot of auth/users/username response](docs/auth_users_username.png)  
 ![screenshot of auth/users/username failed response](docs/auth_users_username_error.png)
 
 #### /auth/users/\<username>/
@@ -79,8 +79,8 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Admin only
 * Request Body: None
-* Response:
-![screenshot of auth/user/delete response](docs/auth_users_delete.png)
+* Response:  
+![screenshot of auth/user/delete response](docs/auth_users_delete.png)  
 ![screenshot of auth/user/delete failed response](docs/auth_users_delete_error.png)
 
 ### Teamboard Data Routes:
@@ -92,7 +92,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Users
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of teamboards/ response](docs/teamboards_all.png)
 
 #### /teamboards/\<int:id>/
@@ -102,7 +102,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Users
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of teamboards/ single response](docs/teamboards_get_one.png)
 
 #### /teamboards/
@@ -112,7 +112,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Users
 * Request Body: Teamboard title and description
-* Response:
+* Response:  
 ![screenshot of teamboards/create response](docs/teamboard_create.png)
 
 #### /teamboards/addchamp/
@@ -122,7 +122,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Users
 * Request Body: Teamboard ID and Champion name (both PKs)
-* Response:
+* Response:  
 ![screenshot of teamboards/addchamp response](docs/add_champ_teamboard.png)
 
 #### /teamboards/removechamp/
@@ -132,7 +132,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Users
 * Request Body: Teamboard ID and Champion name
-* Response:
+* Response:  
 ![screenshot of teamboards/remove delete response](docs/remove_champ_teamboard.png)
 
 #### Champion Data Routes:
@@ -144,7 +144,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: None
 * Authorisation: None
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of champions/ response](docs/champs_all.png)
 
 #### /champions/\<name>/
@@ -154,7 +154,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: None
 * Authorisation: None
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of champions/ single response](docs/champs_get_one.png)
 
 ### Item Data Routes:
@@ -166,7 +166,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: None
 * Authorisation: None
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of items/ response](docs/items_all.png)
 
 #### /items/\<name>/
@@ -176,7 +176,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: None
 * Authorisation: None
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of items/ single response](docs/item_get_one.png)
 
 #### /items/addsuggitem/
@@ -186,7 +186,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Admin only
 * Request Body: Champion Name and Item Name
-* Response:
+* Response:  
 ![screenshot of items/addsuggitem response](docs/items_add_sugg.png)
 
 #### /items/removesuggitem/
@@ -196,7 +196,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: @jwt_required
 * Authorisation: Admin only
 * Request Body: Champion Name and Item Name
-* Response:
+* Response:  
 ![screenshot of items/deletesuggitem response](docs/items_remove_sugg.png)
 
 ### Origins Data Routes:
@@ -208,7 +208,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: None
 * Authorisation: None
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of origins/ response](docs/origins_all.png)
 
 #### /origins/\<name>/
@@ -218,7 +218,7 @@ The endpoints of the api are displayed in the table below:
 * Authentication: None
 * Authorisation: None
 * Request Body: None
-* Response:
+* Response:  
 ![screenshot of origins/ single response](docs/origins_get_one.png)
 
 | Endpoints      | Description | HTTP Requests |
