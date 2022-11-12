@@ -19,6 +19,187 @@ Object Relational Mappers (ORMs) Libraries that allow devs to map data in a rela
 
 The endpoints of the api are displayed in the table below:  
 
+#### Auth routes:
+
+/auth/register/
+*Methods:  POST
+*Arguments: None
+*Description: Allows user to register/create a login
+*Authentication: None
+*Authorisation: None
+*Request Body: Username, Email, Password
+*Response:
+
+/auth/register/admin/
+*Methods:  POST
+*Arguments: None
+*Description: Allows admin to create another account with admin authorisation
+*Authentication: @jwt_required
+*Authorisation: Admin only
+*Request Body: Username, Email, Password
+*Response:
+
+/auth/login/
+*Methods:  POST
+*Arguments: None
+*Description: Allows user to login
+*Authentication: None
+*Authorisation: None
+*Request Body: None
+*Response:
+
+ /auth/users/
+*Methods:  GET
+*Arguments: None
+*Description: Allows admin to retrieve all users
+*Authentication: @jwt_required
+*Authorisation: Admin only
+*Request Body: None
+*Response:
+
+/auth/users/\<username>/
+*Methods:  GET
+*Arguments: Username
+*Description: Allows admin to retrieve specific user
+*Authentication: @jwt_required
+*Authorisation: Admin only
+*Request Body: None
+*Response:
+
+/auth/users/\<username>/
+*Methods:  DELETE
+*Arguments: Username
+*Description: Allows admin to delete a specific user
+*Authentication: @jwt_required
+*Authorisation: Admin only
+*Request Body: None
+*Response:
+
+#### Teamboard Data Routes:
+
+/teamboards/
+*Methods:  GET
+*Arguments: None
+*Description: Retrieves all stored Teamboards created by the logged in user
+*Authentication: @jwt_required
+*Authorisation: Users
+*Request Body: None
+*Response:
+
+/teamboards/\<int:id>/
+*Methods:  GET
+*Arguments: Teamboard ID
+*Description: Retrieves the specified teamboard if the teamboards user matches the logged in user
+*Authentication: @jwt_required
+*Authorisation: Users
+*Request Body: None
+*Response:
+
+/teamboards/
+*Methods:  POST
+*Arguments: None
+*Description: Creates a new teamboard setting the user as the currently logged in user
+*Authentication: @jwt_required
+*Authorisation: Users
+*Request Body: Teamboard title and description
+*Response:
+
+/teamboards/addchamp/
+*Methods:  POST
+*Arguments: None
+*Description: Creates a new record in the teamboards and champions joining/association table. (adding a champion to a teamboard)
+*Authentication: @jwt_required
+*Authorisation: Users
+*Request Body: Teamboard ID and Champion name (both PKs)
+*Response:
+
+/teamboards/removechamp/
+*Methods:  DELETE
+*Arguments: None
+*Description: Deletes a record in the teamboards and champions joining/association table.
+*Authentication: @jwt_required
+*Authorisation: Users
+*Request Body: Teamboard ID and Champion name
+*Response:
+
+#### Champion Data Routes:
+
+/champions/
+*Methods:  GET
+*Arguments: None
+*Description: Retrieves all stored Champions details
+*Authentication: None
+*Authorisation: None
+*Request Body: None
+*Response:
+
+/champions/\<name>/
+*Methods:  GET
+*Arguments: Champion Name
+*Description: Retrieves a specific Champions and details
+*Authentication: None
+*Authorisation: None
+*Request Body: None
+*Response:
+
+Item Data Routes:
+
+/items/
+*Methods:  GET
+*Arguments: None
+*Description: Retrieves all stored items and details
+*Authentication: None
+*Authorisation: None
+*Request Body: None
+*Response:
+
+/items/\<name>/
+*Methods:  GET
+*Arguments: Item Name
+*Description: Retrieves a specific items details
+*Authentication: None
+*Authorisation: None
+*Request Body: None
+*Response:
+
+/items/addsuggitem/
+*Methods:  POST
+*Arguments: None
+*Description: Creates a new record in the champions and items joining/association table. (adding a suggested item to a champion)
+*Authentication: @jwt_required
+*Authorisation: Admin only
+*Request Body: Champion Name and Item Name
+*Response:
+
+/items/removesuggitem/
+*Methods:  DELETE
+*Arguments: None
+*Description: Deletes a record from the champions and items joining/association table.
+*Authentication: @jwt_required
+*Authorisation: Admin only
+*Request Body: Champion Name and Item Name
+*Response:
+
+#### Origins Data Routes:
+
+/origins/
+*Methods:  GET
+*Arguments: None
+*Description: Retrieves all stored origins and details
+*Authentication: None
+*Authorisation: None
+*Request Body: None
+*Response:
+
+/origins/\<name>/
+*Methods:  GET
+*Arguments: Origin Name
+*Description: Retrieves a specific origins details
+*Authentication: None
+*Authorisation: None
+*Request Body: None
+*Response:
+
 | Endpoints      | Description | HTTP Requests |
 | ---------      | ------------| ------------- |
 | /register      | Allows for non-admin user registration | POST |

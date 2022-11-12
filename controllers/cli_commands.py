@@ -4,26 +4,28 @@ from models.users import User
 # from models.traits import Trait
 # from models.champions import Champion
 # from models.items import Item
-from models.teamboards_champions import Teamboard, Champion, Trait, Item
+from models.teamboards_champions_traits_items import Teamboard, Champion, Trait, Item
 from models.origins import Origin
 
 db_commands = Blueprint('db', __name__)
 
-
-
 @db_commands.cli.command('create')
+# creates the tables in the database from the models objects
 def create_db():
     db.create_all()
-    print("Tables created")
+    print('Tables created')
 
 @db_commands.cli.command('drop')
+# drops/deletes tables from database
 def drop_db():
     db.drop_all()
-    print("Tables dropped")
+    print('Tables dropped')
 
-# Creating generic user accounts for testing and admin purposes
+
+
 @db_commands.cli.command('seed')
 def seed_db():
+    # Creating generic logins, user and admin purposes
     users = [
         User(
             username = 'admin',
@@ -32,14 +34,14 @@ def seed_db():
             is_admin = True
         ),
         User(
-            username = 'Cheese_Steiner',
-            email = 'cheeseman@generic.com',
-            password = bcrypt.generate_password_hash('cheese').decode('utf-8'),
+            username = 'tft_greg',
+            email = 'greggod@generic.com',
+            password = bcrypt.generate_password_hash('greg').decode('utf-8'),
         ),
     ]
 
+    # Seedomg the Origins table
     origins = [
-        # Origins
         Origin(
             name = "Astral",
             description = "After each player combat, gain an Astral Orb. The combined star level of your Astral champions increases the quality of the orb. Astral champions gain Ability Power",
@@ -52,7 +54,7 @@ def seed_db():
         ),
         Origin(
             name = "Dragon",
-            description = "Dragons require 2 team slots, provide +3 to their marked trait and gain additional bonuses based on how many Dragons are on your team.",
+            description = "Gain additional bonuses based on how many Dragons are on your team.",
             breakpoints = "1 / 2 / 3 / 4 / 5 / 6"
         ),
         Origin(
@@ -77,7 +79,7 @@ def seed_db():
         ),
         Origin(
             name = "Ragewing",
-            description = "Innate: Convert Mana to Rage; Attacks generate 15 Rage. After casting an Ability, enrage for 4 seconds: +30% Attack Speed but can't gain Rage. Gain bonus stats when enraged.",
+            description = "Attacks generate 15 Rage. After casting an Ability, gain Attack Speed. Gain bonus stats when enraged.",
             breakpoints = "2 / 4 / 6 / 8"
         ),
         Origin(
@@ -101,7 +103,7 @@ def seed_db():
             breakpoints = "2 / 4 / 6"
         )
     ]
-        # Classes
+    # Seeding the Traits table
     traits = [
         Trait(
             name = "Assassin",
@@ -179,12 +181,13 @@ def seed_db():
             breakpoints = "2 / 3 / 4 / 5"
         ) ,
         Trait(
-            name = "Warrior",
+            name = 'Warrior',
             description = "Warrior attacks have a chance to increase the damage of their next attack.",
             breakpoints = "2 / 4 / 6"
         )
     ]
 
+    # Seeding the Items table
     items = [
         Item(
             name = "Archangel's Staff",
@@ -243,7 +246,7 @@ def seed_db():
         ),
         Item(
             name = "Guinsoo's Rageblade",
-            item_bonus = "Attacks grant 6% bonus Attack Speed. This effect stacks.",
+            item_bonus = "Attacks grant 6%  Attack Speed. This effect stacks.",
             stats = "10 Ability Power, 10% Attack Speed"
         ),
         Item(
@@ -343,7 +346,7 @@ def seed_db():
         ),
         Item(
             name = "Titan's Resolve",
-            item_bonus = "Grants 2 Attack Damage and 2 Ability Power when attacking or taking damage, stacking up to 25 times. Grants 25 Armor and Magic Resistance at 25 stacks.",
+            item_bonus = "Grants Attack Damage and Ability Power when dealing or taking damage. Grants Armor and Magic Resistance at 25 stacks.",
             stats = "10% Attack Speed, 20 Armor"
         ),
         Item(
@@ -368,440 +371,393 @@ def seed_db():
         )
     ]
 
-
+    # Adding and commiting traits, origins and users before creation of Champion data
     db.session.add_all(origins)
     db.session.add_all(traits)
     db.session.add_all(users)
     db.session.commit()
 
+    # Seeding the Champions table
     champs = [
         Champion(
             name = "Ao Shin",
             cost = "8",
             ability = "Fires a barrage of lightning strikes at random enemies",
-            origin_id = "Tempest",
-            suggested_items = "Spear of Shojin, Archangel's Staff, Hextech Gunblade"
+            origin_id = "Tempest"
         ),
         Champion(
             name = "Aphelios",
             cost = "2",
             ability = "Uses his Infernum cannon to blast bolts in a cone towards his target.",
-            origin_id = "Darkflight",
-            suggested_items = "Zeke's Herald, Last Whisper, Infinity Edge"
+            origin_id = "Darkflight"
         ),
         Champion(
             name = "Aurelion Sol",
             cost = "8",
             ability = "Summons an unstable black hole underneath a random enemy.",
-            origin_id = "Astral",
-            suggested_items = "Hextech Gunblade, Archangel's Staff, Jeweled Gauntlet"
+            origin_id = "Astral"
         ),
         Champion(
             name = "Bard",
             cost = "5",
             ability = "Sends magical energy toward the largest group of enemies, stunning them and causing them to take increased damage while stunned",
-            origin_id = "Guild",
-            suggested_items = "Spear of Shojin, Shroud of Stillness, Zeke's Herald"
+            origin_id = "Guild"
         ),
         Champion(
             name = "Braum",
             cost = "2",
             ability = "Puts up his shield towards the largest group of enemies for 4 seconds",
-            origin_id = "Scalescorn",
-            suggested_items = "Sunfire Cape, Warmog's Armor, Bramble Vest"
+            origin_id = "Scalescorn"
         ),
         Champion(
             name = "Deeja",
             cost = "7",
             ability = "Sends a wind blast toward the largest group of enemies.",
-            origin_id = "Mirage",
-            suggested_items = "Guinsoo's Rageblade, Giant Slayer, Archangel's Staff"
+            origin_id = "Mirage"
         ),
         Champion(
             name = "Diana",
             cost = "3",
             ability = "Shields herself and summons damaging orbs around her. ",
-            origin_id = "Scalescorn",
-            suggested_items = "Ionic Spark, Hand of Justice, Sunfire Cape"
+            origin_id = "Scalescorn"
         ),
         Champion(
             name = "Dragon Tyrant Swain",
             cost = "7",
             ability = "Launches 8 dragonlings toward enemies that deal damage and heal Swain",
-            suggested_items = "Morellonomicon, Titan's Resolve, Archangel's Staff"
+            origin_id = "Darkflight"
         ),
         Champion(
             name = "Ezreal",
             cost = "1",
             ability = "Fires an energy bolt towards his target",
-            origin_id = "Tempest",
-            suggested_items = "Blue Buff, Infinity Edge, Jeweled Gauntlet"
+            origin_id = "Tempest"
         ),
         Champion(
             name = "Gnar",
             cost = "2",
             ability = "Transforms into Mega Form, knocking up nearby enemies.",
-            origin_id = "Jade",
-            suggested_items = "Sunfire Cape, Protector's Vow, Redemption"
+            origin_id = "Jade"
         ),
         Champion(
             name = "Graves",
             cost = "4",
             ability = "Dashes towards his target, quickly fires two attacks.",
-            origin_id = "Tempest",
-            suggested_items = "Edge of Night, Titan's Resolve, Bloodthirster"
+            origin_id = "Tempest"
         ),
         Champion(
             name = "Hecarim",
             cost = "4",
             ability = "Summons spectral riders that charge through his target",
-            origin_id = "Ragewing",
-            suggested_items = "Morellonomicon, Protector's Vow, Zz'Rot Portal"
+            origin_id = "Ragewing"
         ),
         Champion(
             name = "Idas",
             cost = "7",
             ability = "Hardens her scales for 2 seconds, reducing incoming damage.",
-            origin_id = "Shimmerscale",
-            suggested_items = "Gargoyle Stoneplate"
+            origin_id = "Shimmerscale"
         ),
         Champion(
             name = "Jax",
             cost = "2",
             ability = "Dodges all incoming attacks for 2 seconds.",
-            origin_id = "Jade",
-            suggested_items = "Sunfire Cape, Gargoyle Stoneplate, Warmog's Armor"
+            origin_id = "Jade"
         ),
         Champion(
             name = "Jayce",
             cost = "4",
             ability = "Transforms to his melee form, then slams the ground around his target.",
-            origin_id = "Guild",
-            suggested_items = "Ionic Spark, Protector's Vow, Warmog's Armor"
+            origin_id = "Guild"
         ),
         Champion(
             name = "Kai'Sa",
             cost = "2",
             ability = "Fires 4 missiles split between her target and up to 2 other targets.",
-            origin_id = "Lagoon",
-            suggested_items = "Blue Buff, Archangel's Staff, Giant Slayer"
+            origin_id = "Lagoon"
         ),
         Champion(
             name = "Karma",
             cost = "1",
             ability = "Fires a burst of energy towards her target.",
-            origin_id = "Jade",
-            suggested_items = "Blue Buff, Jeweled Gauntlet, Infinity Edge"
+            origin_id = "Jade"
         ),
         Champion(
             name = "Lee Sin",
             cost = "3",
             ability = "Kicks his target, stunning and knocking them back.",
-            origin_id = "Tempest",
-            suggested_items = "Hand of Justice, Infinity Edge, Jeweled Gauntlet"
+            origin_id = "Tempest"
         ),
         Champion(
             name = "Leona",
             cost = "1",
             ability = "Creates a barrier around herself, reducing all incoming damage.",
-            origin_id = "Mirage",
-            suggested_items = "Warmog's Armor, Sunfire Cape, Dragon's Claw"
+            origin_id = "Mirage"
         ),
         Champion(
             name = "Lillia",
             cost = "2",
             ability = "Strikes a small area around her target's current location.",
-            origin_id = "Scalescorn",
-            suggested_items = "Ionic Spark, Bloodthirster, Archangel's Staff"
+            origin_id = "Scalescorn"
         ),
         Champion(
             name = "Lux",
             cost = "2",
             ability = "Fires a star towards the farthest enemy.",
-            origin_id = "Astral",
-            suggested_items = "Spear of Shojin, Jeweled Gauntlet, Infinity Edge"
+            origin_id = "Astral"
         ),
         Champion(
             name = "Malphite",
             cost = "1",
             ability = "Shields himself for 5 seconds.",
-            origin_id = "Lagoon",
-            suggested_items = "Zz'Rot Portal, Sunfire Cape, Gargoyle Stoneplate"
+            origin_id = "Lagoon"
         ),
         Champion(
             name = "Nasus",
             cost = "1",
             ability = "Surrounds himself in light gaining health and dealing damage.",
-            origin_id = "Shimmerscale",
-            suggested_items = "Warmog's Armor, Titan's Resolve, Morellonomicon"
+            origin_id = "Shimmerscale"
         ),
         Champion(
             name = "Nidalee",
             cost = "1",
             ability = "Transforms into Cougar Form for the rest of combat, gaining bonus stats.",
-            origin_id = "Astral",
-            suggested_items = "Fuinsoo's Rageblade, Deathblade, Runaan's Hurricane"
+            origin_id = "Astral"
         ),
         Champion(
             name = "Nilah",
             cost = "4",
             ability = "Cracks her whip-blade at her target, dashing through them.",
-            origin_id = "Lagoon",
-            suggested_items = "Infinity Edge, Hand of Justice, Bloodthirster"
+            origin_id = "Lagoon"
         ),
         Champion(
             name = "Nunu",
             cost = "3",
             ability = "Bites his target, dealing magic damage.",
-            origin_id = "Mirage",
-            suggested_items = "Warmog's Armor, Sunfire Cape, Redemption"
+            origin_id = "Mirage"
         ),
         Champion(
             name = "Olaf",
             cost = "3",
             ability = "Strikes his target, gaining bonus attack speed.",
-            origin_id = "Scalescorn",
-            suggested_items = "Infinity Edge, Bloodthirster, Rapid Firecannon"
+            origin_id = "Scalescorn"
         ),
         Champion(
             name = "Pantheon",
             cost = "4",
             ability = "Braces his shield, dealing damage in front of him.",
-            origin_id = "Whispers",
-            suggested_items = "Bloodthirster, Titan's Resolve, Edge of Night"
+            origin_id = "Whispers"
         ),
         Champion(
             name = "Qiyana",
             cost = "2",
             ability = "Dashes to the best position to strike enemies with her blade.",
-            origin_id = "Tempest",
-            suggested_items = "Shroud of Stillness, Banshee's Claw, Zephyr"
+            origin_id = "Tempest"
         ),
         Champion(
             name = "Rakan",
             cost = "3",
             ability = "Dashes to the farthest enemy, disarming units he travels through.",
-            origin_id = "Ragewing",
-            suggested_items = "Sunfire Cape, Protector's Vow, Zz'Rot Portal"
+            origin_id = "Ragewing"
         ),
         Champion(
             name = "Rell",
             cost = "2",
             ability = "Tethers to an ally which protects her ally and deals damage to enemies.",
-            origin_id = "Darkflight",
-            suggested_items = "Protector's Vow, Sunfire Cape, Zeke's Herald"
+            origin_id = "Darkflight"
         ),
         Champion(
             name = "Rengar",
             cost = "3",
             ability = "Leaps to the lowest armor enemy, dealing damage.",
-            origin_id = "Darkflight",
-            suggested_items = "Infinity Edge, Bloodthirster, Runaan's Huricane"
+            origin_id = "Darkflight"
         ),
         Champion(
             name = "Sejuani",
             cost = "1",
             ability = "Swings her mace wide, hitting all enemies in a cone dealing damage.",
-            origin_id = "Guild",
-            suggested_items = "Sunfire Cape, Zz'Rot Portal, Chalice of Power"
+            origin_id = "Guild"
         ),
         Champion(
             name = "Senna",
             cost = "1",
             ability = "Launches black mist toward the farthest enemy dealing damage.",
-            origin_id = "Ragewing",
-            suggested_items = "Thief's Gloves, Guinsoo's Rageblade, Last Whisper"
+            origin_id = "Ragewing"
         ),
         Champion(
             name = "Seraphine",
             cost = "3",
             ability = "Grants a shield and bonus damage to allies",
-            origin_id = "Lagoon",
-            suggested_items = "Morellonomicon, Spear of Shojin, Rabadon's Deathcap"
+            origin_id = "Lagoon"
         ),
         Champion(
             name = "Sett",
             cost = "1",
             ability = "Gains Armor and Magic Resist.",
-            origin_id = "Ragewing",
-            suggested_items = "Guinsoo's Rageblade, Quicksilver, Giant Slayer"
+            origin_id = "Ragewing"
         ),
         Champion(
             name = "Shi Oh Yu",
             cost = "7",
             ability = "Gains damage reduction, immunity to cc, and empowering her next 3 attacks",
-            origin_id = "Jade",
-            suggested_items = "Bloodthirster, Titan's Resolve, Edge of Night"
+            origin_id = "Jade"
         ),
         Champion(
             name = "Shyvana",
             cost = "8",
             ability = "Transforms into Dragon Form for the rest of combat.",
-            origin_id = "Ragewing",
-            suggested_items = "Morellonomicon, Ionic Spark, Archangel's Staff"
+            origin_id = "Ragewing"
         ),
         Champion(
             name = "Skarner",
             cost = "1",
             ability = "Shields himself for 8 seconds and gains Attack Speed.",
-            suggested_items = "Sunfire Cape, Zz'Rot Portal, Redemption"
+            origin_id = "Astral"
         ),
         Champion(
             name = "Sohm",
             cost = "7",
             ability = "Sends out a tide dealing damage.",
-            origin_id = "Lagoon",
-            suggested_items = "Blue Buff, Morellonomicon, Jeweled Gauntlet"
+            origin_id = "Lagoon"
         ),
         Champion(
             name = "Soraka",
             cost = "5",
             ability = "Calls down a shower of stars that heals allies.",
-            origin_id = "Jade",
-            suggested_items = "Spear of Shojin, Chalice of Power, Statikk Shiv"
+            origin_id = "Jade"
         ),
         Champion(
             name = "Syfen",
             cost = "7",
             ability = "Charges forward, dealing damage and knocking up enemies.",
-            origin_id = "Whispers",
-            suggested_items = "Bloodthirster, Titan's Resolve, Quicksilver"
+            origin_id = "Whispers"
         ),
         Champion(
             name = "Sylas",
             cost = "7",
             ability = "Whirls his chains, dealing damage and applying Mana-Reave.",
-            origin_id = "Whispers",
-            suggested_items = "Gargoyle Stoneplate, Sunfire Cape, Zz'Rot Portal"
+            origin_id = "Whispers"
         ),
         Champion(
             name = "Taliyah",
             cost = "1",
             ability = "Deals damage by throwing 3 seastones at her target.",
-            origin_id = "Lagoon",
-            suggested_items = "Spear of Shojin, Rabadon's Deathcap, Statikk Shiv"
+            origin_id = "Lagoon"
         ),
         Champion(
             name = "Terra",
             cost = "8",
-            ability = "Stomps three times causing an earthquake around them, dealing damage.",
-            suggested_items = "Gargoyle Stoneplate, Bramble Vest, Dragon's Claw"
+            ability = "Stomps three times causing an earthquake around them, dealing damage."
         ),
         Champion(
             name = "Twitch",
             cost = "2",
             ability = "Hurls an exploding flask, dealing physical damage and reducing Armor.",
-            origin_id = "Guild",
-            suggested_items = "Infinity Edge, Last Whisper, Runaan's Hurricane"
+            origin_id = "Guild"
         ),
         Champion(
             name = "Varus",
             cost = "3",
             ability = "Sends out a cosmic tendril that strikes the first enemy hit.",
-            origin_id = "Astral",
-            suggested_items = "Guinsoo's Rageblade, Giant Slayer, Runaan's Hurricane"
+            origin_id = "Astral"
         ),
         Champion(
             name = "Vladimir",
             cost = "1",
             ability = "Deals damage to the target and heals himself.",
-            origin_id = "Astral",
-            suggested_items = "Warmog's Armor, Titan's Resolve, Redemption"
+            origin_id = "Astral"
         ),
         Champion(
             name = "Volibear",
             cost = "3",
             ability = "Rages, gaining bonus Health. Every 3rd attack hits surrounding enemies",
-            origin_id = "Shimmerscale",
-            suggested_items = "Guinsoo's Rageblade, Bloodthirster, Quicksilver"
+            origin_id = "Shimmerscale"
         ),
         Champion(
             name = "Wukong",
             cost = "1",
             ability = "Slams his target with his staff, dealing extra damage and stunning.",
-            origin_id = "Jade",
-            suggested_items = "Rapid Firecannon, Deathblade, Infinity Edge"
+            origin_id = "Jade"
         ),
         Champion(
             name = "Xayah",
             cost = "4",
             ability = "Attacks also fire a feather which are recalled and deal damage.",
-            origin_id = "Ragewing",
-            suggested_items = "Guinsoo's Rageblade, Giant Slayer, Last Whisper"
+            origin_id = "Ragewing"
         ),
         Champion(
             name = "Yasuo",
             cost = "5",
             ability = "Shields himself and dashes through his target, dealing damage.",
-            origin_id = "Mirage",
-            suggested_items = "Blue Buff, Bloodthirster, Titan's Resolve"
+            origin_id = "Mirage"
         ),
         Champion(
             name = "Yone",
             cost = "2",
             ability = "Basic attacks deal bonus damage.",
-            origin_id = "Mirage",
-            suggested_items = "Guinsoo's Rageblade, Quicksilver, Bloodthirster"
+            origin_id = "Mirage"
         ),
         Champion(
             name = "Zac",
             cost = "2",
             ability = "Explodes outward, dealing damage to enemies and healing himself.",
-            origin_id = "Lagoon",
-            suggested_items = "Bramble Vest, Dragon's Claw, Warmog's Armor"
+            origin_id = "Lagoon"
         ),
         Champion(
             name = "Zeri",
             cost = "3",
             ability = "Fires a water pulse at the closest enemy, damaging all in a line.",
-            origin_id = "Lagoon",
-            suggested_items = "Bramble Vest, Dragon's Claw, Warmog's Armor"
+            origin_id = "Lagoon"
         ),
         Champion(
             name = "Zippy",
             cost = "6",
             ability = "shields himself and somersaults an enemy, dealing physical damage.",
-            origin_id = "Guild",
-            suggested_items = "Bramble Vest, Dragon's Claw, Warmog's Armor"
+            origin_id = "Guild"
         ),
         Champion(
             name = "Zoe",
             cost = "5",
             ability = "Borrows spells from other dimensions during combat and cast them as if they were her own.",
-            origin_id = "Shimmerscale",
-            suggested_items = ""
+            origin_id = "Shimmerscale"
         ),
         Champion(
             name = "Zyra",
             cost = "2",
             ability = "Summons vines, dealing magic damage and stunning enemies.",
-            suggested_items = "Bramble Vest, Dragon's Claw, Warmog's Armor"
+            origin_id = "Whispers"
         )
     ]
 
 
-
+    # Adding and Committing champs and items before sedding the Association (relationship) tables
     db.session.add_all(champs)
     db.session.add_all(items)
     db.session.commit()
 
-    tbs = [
+    # Seeding the Teamboards
+    teamboards = [
         Teamboard(
             title = "Lagoon",
             description = "Lagoon Team",
-    
             user_id = "admin"
+        ),
+        Teamboard(
+            title = "Astral",
+            description = "Astral Team",
+            user_id = "tft_greg"
         )
     ]
-    db.session.add_all(tbs)
+    db.session.add_all(teamboards)
 
-    tb = tbs[0]
+    #  Seeding the Teamboards to Champions Association table (many-to-many relationship)
+    tb = teamboards[0]
     tb.champions.append(champs[0])
     tb.champions.append(champs[1])
-    # tb.champions.append(champs[46])
-    # tb.champions.append(champs[56])
-    # tb.champions.append(champs[37])
+    tb.champions.append(champs[46])
+    tb.champions.append(champs[56])
+    tb.champions.append(champs[37])
 
+    # Seeding the Champions and Traits Association table (many-to-many relationship)
     assassin = traits[0]
     assassin.champions.append(champs[6])
     assassin.champions.append(champs[24])
@@ -896,16 +852,66 @@ def seed_db():
     warrior.champions.append(champs[51])
     warrior.champions.append(champs[52])
 
-
+    # Seeding the Champions and Items Association table (many-to-many)
     archa = items[0]
     archa.champions.append(champs[5])
     archa.champions.append(champs[56])
     archa.champions.append(champs[57])
 
+    guin = items[11]
+    guin.champions.append(champs[3])
+    guin.champions.append(champs[5])
+    guin.champions.append(champs[8])
+    guin.champions.append(champs[10])
+    guin.champions.append(champs[15])
+    guin.champions.append(champs[26])
+    guin.champions.append(champs[33])
+    guin.champions.append(champs[46])
+    guin.champions.append(champs[50])
+    guin.champions.append(champs[52])
+
+    infinity = items[14]
+    infinity.champions.append(champs[10])
+    infinity.champions.append(champs[24])
+    infinity.champions.append(champs[51])
+    infinity.champions.append(champs[52])
+
+    blue = items[3]
+    blue.champions.append(champs[2])
+    blue.champions.append(champs[20])
+    blue.champions.append(champs[39])
+    blue.champions.append(champs[43])
+    blue.champions.append(champs[51])
+
+    titans = items[31]
+    titans.champions.append(champs[10])
+    titans.champions.append(champs[14])
+    titans.champions.append(champs[27])
+    titans.champions.append(champs[36])
+
+    warmogs = items[32]
+    warmogs.champions.append(champs[7])
+    warmogs.champions.append(champs[11])
+    warmogs.champions.append(champs[18])
+    warmogs.champions.append(champs[21])
+    warmogs.champions.append(champs[25])
+    warmogs.champions.append(champs[29])
+    warmogs.champions.append(champs[30])
+    warmogs.champions.append(champs[32])
+    warmogs.champions.append(champs[35])
+    warmogs.champions.append(champs[37])
+    warmogs.champions.append(champs[38])
+    warmogs.champions.append(champs[41])
+    warmogs.champions.append(champs[42])
+    warmogs.champions.append(champs[44])
+    warmogs.champions.append(champs[47])
+    warmogs.champions.append(champs[53])
+
+    # Further champions and items assosiations, this time appending a seeded champion record
+
     Ao_shin = champs[0]
     Ao_shin.items.append(items[0])
     Ao_shin.items.append(items[-9])
-
 
     Braum = champs[4]
     Braum.items.append(items[4])
@@ -913,26 +919,7 @@ def seed_db():
 
     Aphelios = champs[1]
     Aphelios.items.append(items[-3])
+
+    # final commit after assosiation tables filled out
     db.session.commit()
     print('Tables Seeded')
-
-# @db_commands.cli.command('team')
-# def seed_tb():
-#     tbs = [
-#         Teamboard(
-#             title = "Lagoon",
-#             description = "Lagoon Team",
-    
-#             user_id = "admin"
-#         )
-#     ]
-#     db.session.add_all(tbs)
-#     db.session.commit()
-#     print('tb Seeded')
-
-
-# @db.commands.cli.command('boards')
-# def seed_boardchamps():
-#     tbc = [
-        
-#     ]

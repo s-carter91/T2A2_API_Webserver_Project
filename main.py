@@ -6,7 +6,7 @@ from controllers.items_controllers import items_bp
 from controllers.champions_controller import champions_bp
 from controllers.teamboards_controller import teamboards_bp
 from controllers.traits_controller import traits_bp
-from models.teamboards_champions import test_bp
+from controllers.origins_controller import origins_bp
 from marshmallow.exceptions import ValidationError
 import os
 
@@ -17,6 +17,10 @@ def create_app():
     @app.errorhandler(KeyError)
     def key_error(err):
         return {'error': f'The field {err} is required'}, 400
+    
+    @app.errorhandler(401)
+    def unauth_error(err):
+        return {'error': str(err)}, 404
 
     app.config['JSON_SORT_KEYS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
@@ -33,6 +37,6 @@ def create_app():
     app.register_blueprint(teamboards_bp)
     app.register_blueprint(items_bp)
     app.register_blueprint(traits_bp)
-    app.register_blueprint(test_bp)
+    app.register_blueprint(origins_bp)
 
     return app

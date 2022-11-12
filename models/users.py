@@ -9,8 +9,11 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+    teamboards = db.relationship('Teamboard', back_populates='user',  cascade='all, delete-orphan')
+    
 class UserSchema(ma.Schema):
 
     class Meta:
         fields = ('username', 'email', 'password', 'is_admin')
         ordered = True
+        dumponly = ('username', 'email')
