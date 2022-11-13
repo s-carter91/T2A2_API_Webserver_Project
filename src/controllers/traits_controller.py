@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint
 from init import db
 from models.teamboards_champions_traits_items import Trait, TraitSchema
 

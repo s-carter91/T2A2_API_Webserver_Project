@@ -1,9 +1,6 @@
 from flask import Blueprint
 from init import db, bcrypt
 from models.users import User
-# from models.traits import Trait
-# from models.champions import Champion
-# from models.items import Item
 from models.teamboards_champions_traits_items import Teamboard, Champion, Trait, Item
 from models.origins import Origin
 

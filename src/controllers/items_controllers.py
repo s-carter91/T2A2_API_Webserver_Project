@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_jwt_extended import jwt_required
 from init import db
 from controllers.auth_controller import auth_admin
-from models.teamboards_champions_traits_items import Item, ItemSchema, Champion, ChampionSchema 
+from models.teamboards_champions_traits_items import Item, ItemSchema, Champion
 
 
 

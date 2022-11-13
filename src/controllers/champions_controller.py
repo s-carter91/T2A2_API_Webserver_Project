@@ -1,8 +1,6 @@
-from flask import Blueprint, request, abort
+from flask import Blueprint
 from init import db
 from models.teamboards_champions_traits_items import Champion, ChampionSchema
-from models.origins import Origin
-# from models.champions import Champion, ChampionSchema
 
 champions_bp = Blueprint('champions', __name__, url_prefix='/champions/')
 

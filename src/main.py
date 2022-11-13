@@ -7,7 +7,6 @@ from controllers.champions_controller import champions_bp
 from controllers.teamboards_controller import teamboards_bp
 from controllers.traits_controller import traits_bp
 from controllers.origins_controller import origins_bp
-from marshmallow.exceptions import ValidationError
 import os
 
 def create_app():
