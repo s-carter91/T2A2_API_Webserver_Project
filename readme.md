@@ -295,8 +295,8 @@ The following third party services were used in the application:
 * Bcrypt - Allows for password hashing within your app. Hashing a password is more secure than encryption as encrypted data is a two-way street in the sense that is can be decrypted. Hashing jumbles plaintext into a unique digest that can't be decrypted. Therefore, Bcrypt is a great choice when dealing with the storing of passwords in an app.
 * Flask-JWT-Extended - Allows for creation of authentication tokens. This can be used to protect routes from potentially malicious users by checking a visitor has a valid token before preparing and returning any data. On top of this, authorisation was made much easier with the get_jwt_identity method which returns the users identity.  
 
-[Encryption vs Hashing Reference](https://www.encryptionconsulting.com/education-center/encryption-vs-hashing/)
-[pypy Bcrypt](https://pypi.org/project/bcrypt/)
+[Encryption vs Hashing Reference](https://www.encryptionconsulting.com/education-center/encryption-vs-hashing/)  
+[pypy Bcrypt](https://pypi.org/project/bcrypt/)  
 [pypy Flask_JWT-Extended](https://pypi.org/project/Flask-JWT-Extended/)
 
 ### 8. Describe your projects models in terms of the relationships they have with each other
@@ -309,7 +309,7 @@ A user can create multiple teamboards but when they register a User (login) they
 A teamboard on the other hand can have one and only one user.
 Therefore this relationship is a one and only one (User) to none or many (Teamboard)
 
-![User Teamboard Relationship](docs/user_teamb_relationship.png)
+![User Teamboard Relationship](docs/user_teamb_relationship.png)  
 ![Teamboard User Relationship](docs/teamb_user_relas.png)
 
 #### Teamboard Model and Champ Model Relationship
@@ -328,7 +328,7 @@ This relationship is another many-to-many relationship so the join table trait_c
 
 This relationship is a one or many (Champion) to one and only one (Origin). A Champion can have one and only one Origin, but an Origin can have one or many Champions.
 
-![Champ Origin Relationship](docs/champ_origin_relationship.png)
+![Champ Origin Relationship](docs/champ_origin_relationship.png)  
 ![Origin Champ Relationship](docs/origin_champ_relationship.png)
 
 #### Champion Model and Item Model Relationship
@@ -459,9 +459,11 @@ This method has been used for all tasks including creation of the following:
 * Relationship Association/Join Tables
 * Cli Commands
 
-Click [here](https://trello.com/b/eTnyY0hK/api-webserver-project) to view the Tello board in full.
+Click [here](https://trello.com/b/eTnyY0hK/api-webserver-project) to view the Tello board in full.  
 
-[Image of Trello Kanban Board](docs/kanban_board.png)
+![Image of Trello Kanban Board](docs/kanban_board.png)  
+  
+[Link to T2A2 Sam Carter Git Repo](https://github.com/s-carter91/T2A2_API_Webserver_Project)
 
 ### Quick Use Instructions
 
