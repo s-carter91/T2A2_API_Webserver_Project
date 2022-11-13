@@ -462,3 +462,18 @@ This method has been used for all tasks including creation of the following:
 Click [here](https://trello.com/b/eTnyY0hK/api-webserver-project) to view the Tello board in full.
 
 [Image of Trello Kanban Board](docs/kanban_board.png)
+
+### Quick Use Instructions
+
+Seeded User and Teamboards data below:
+
+User details:
+normal user -   username = tft_greg
+                password = greg  
+
+Teamboards owned by tft_greg - Astral
+
+admin user -    username = admin
+                password = tft
+
+Teamboards owned by admin - Lagoon
