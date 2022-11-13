@@ -288,6 +288,8 @@ The endpoints of the api are listed below:
 
 ### 6. An ERD for your app
 
+![TFT ERD](docs/erd_tft.png)
+
 ### 7. Detail any third party services that your app will use
 
 The following third party services were used in the application:
